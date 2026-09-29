@@ -20,8 +20,6 @@ jobs:
           pyside6-qmlformat contents/ui/main.qml > /dev/null
           pyside6-qmlformat contents/ui/ActiveApplication.qml > /dev/null
       - run: python tests/test_active_application.py
-        env:
-          QT_QPA_PLATFORM: offscreen
       - run: python scripts/package.py
       - uses: actions/upload-artifact@v4
         with:

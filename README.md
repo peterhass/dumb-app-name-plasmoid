@@ -78,7 +78,7 @@ node tests/names.test.cjs
 # Optional development dependency; not needed to use the widget:
 python3 -m venv .venv
 .venv/bin/pip install PySide6-Essentials
-QT_QPA_PLATFORM=offscreen .venv/bin/python tests/test_active_application.py
+.venv/bin/python tests/test_active_application.py
 ```
 
 The Qt tests load the production tracking QML with a mock Plasma task model.

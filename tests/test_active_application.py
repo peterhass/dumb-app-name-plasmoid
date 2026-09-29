@@ -1,17 +1,14 @@
 """Exercise production QML against a mock task model using a real Qt engine.
 
 This checks reactive QML behavior, not KDE backend or panel integration.
-Run with PySide6-Essentials installed and QT_QPA_PLATFORM=offscreen.
+Run with PySide6-Essentials installed. No display server is needed.
 """
-import os
 from enum import IntEnum
 from pathlib import Path
 import unittest
 
-os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-from PySide6.QtCore import (QAbstractListModel, QModelIndex, QObject, Property,
+from PySide6.QtCore import (QAbstractListModel, QCoreApplication, QModelIndex, QObject, Property,
                             QEnum, Signal, Qt, QUrl)
-from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlComponent, QQmlEngine, qmlRegisterType, qmlRegisterUncreatableType
 
 
@@ -75,7 +72,7 @@ class TasksModel(QAbstractListModel):
                               [AbstractTasksModel.AdditionalRoles.AppName])
 
 
-app = QGuiApplication([])
+app = QCoreApplication([])
 qmlRegisterType(TasksModel, "org.kde.taskmanager", 1, 0, "TasksModel")
 qmlRegisterUncreatableType(AbstractTasksModel, "org.kde.taskmanager", 1, 0,
                           "AbstractTasksModel", "Enums only")
