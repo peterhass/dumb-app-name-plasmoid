@@ -2,6 +2,8 @@
 
 This Plasma 6 widget shows the active application name in bold text.
 
+![The widget shows kitty in a Plasma panel.](images/widget-preview.png)
+
 ## Functions
 
 - The widget reads the `AppName` value from the Plasma task model.
