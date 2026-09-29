@@ -28,8 +28,8 @@ PlasmoidItem {
         text: activeApplication.name
         textFormat: Text.PlainText
         font.bold: true
-        // PlasmaComponents.Label inherits the panel's Kirigami theme and
-        // system font. Keep all font attributes except weight at defaults.
+        // PlasmaComponents.Label uses the panel theme and system font.
+        // Change only the font weight. Keep all other font settings.
         elide: Text.ElideRight
         maximumLineCount: 1
         wrapMode: Text.NoWrap

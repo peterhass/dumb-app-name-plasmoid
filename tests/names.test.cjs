@@ -1,4 +1,4 @@
-// Test the actual QML JavaScript without its QML-only pragma.
+// Test the widget JavaScript. Remove the pragma that only QML supports.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');

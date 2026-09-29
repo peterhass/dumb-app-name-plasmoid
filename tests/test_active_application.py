@@ -1,7 +1,9 @@
-"""Exercise production QML against a mock task model using a real Qt engine.
+"""Test the widget QML files with a test task model and a Qt engine.
 
-This checks reactive QML behavior, not KDE backend or panel integration.
-Run with PySide6-Essentials installed. No display server is needed.
+These tests check QML updates when the task model changes.
+They do not check the actual Plasma task model or panel.
+Install PySide6-Essentials before you run the tests.
+The tests do not need a display server.
 """
 from enum import IntEnum
 from pathlib import Path

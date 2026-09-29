@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build an installable Plasma package using only Python's standard library."""
+"""Create a Plasma installation file. Use only the Python standard library."""
 from pathlib import Path
 import json
 import zipfile

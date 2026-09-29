@@ -3,7 +3,7 @@
     "KPlugin": {
         "Id": "com.github.peterhass.dumb-app-name-plasmoid",
         "Name": "dumb-app-name-plasmoid",
-        "Description": "Just the active application's name, in bold.",
+        "Description": "Shows the active application name in bold text.",
         "Icon": "preferences-system-windows",
         "Version": "0.1.0",
         "License": "MIT",

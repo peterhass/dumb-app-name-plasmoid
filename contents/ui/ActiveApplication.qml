@@ -6,8 +6,8 @@ import "../code/Names.js" as Names
 QtObject {
     id: root
 
-    // data() is a method, so explicitly invalidate the binding when model
-    // data changes even if the active QModelIndex itself stays the same.
+    // Update the name binding when model data changes.
+    // The active QModelIndex can stay the same when the name changes.
     property int modelRevision: 0
     readonly property string name: {
         const revision = modelRevision;
@@ -20,7 +20,7 @@ QtObject {
 
     property QtObject tasksModel: TaskManager.TasksModel {
         groupMode: TaskManager.TasksModel.GroupDisabled
-        // The active window may be on any monitor, desktop, or activity.
+        // Include tasks from all monitors, virtual desktops, and activities.
         filterByScreen: false
         filterByVirtualDesktop: false
         filterByActivity: false

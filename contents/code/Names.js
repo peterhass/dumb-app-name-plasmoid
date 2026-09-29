@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 .pragma library
 
-// Match the entire application name, not a document/window title.
+// Match the full application name.
 var substitutions = [
     [/^Telegram Desktop$/, "Telegram"],
     [/^Gimp-.*$/, "Gimp"],
