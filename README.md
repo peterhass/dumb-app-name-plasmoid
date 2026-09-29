@@ -11,10 +11,11 @@ This Plasma 6 widget shows the active application name in bold text.
 - The widget has no icons or window buttons.
 - The widget shows the active application name on all monitors.
 - The task model has no screen, virtual desktop, or activity filters.
-- The maximum preferred width is 12 grid units. This is approximately 216 pixels with the usual font settings.
-- If the name is too long, the label replaces the text at the right end with an ellipsis.
+- The widget uses the full label width up to 12 grid units. This is approximately 216 pixels with the usual font settings.
+- If the name does not fit within 12 grid units, the label replaces the text at the right end with an ellipsis.
 - If no task is active, the label is empty.
 - If the application name is not available, the label is empty.
+- In Plasma edit mode, an empty label shows `Application Name` so you can find and move the widget.
 
 ## Application name rules
 
@@ -146,14 +147,15 @@ You can get this file from the workflow run.
 
 Complete these checks before a release:
 
-1. Switch between Firefox and Dolphin. Include windows on another monitor.
+1. Switch between Firefox and Dolphin. Make sure that both full names fit. Include windows on another monitor.
 2. Check each application name rule.
 3. Change between light and dark Plasma themes. Make sure that the label uses the panel text color.
 4. Change the system font. Make sure that the label uses the new font and stays bold.
 5. Select the desktop. Make sure that the label becomes empty when no task is active.
 6. Close the active window. Make sure that the label shows the new active application or becomes empty.
 7. Switch virtual desktops. Make sure that the label shows the active application.
-8. Open an application with a long name. Make sure that the label shows an ellipsis at the right end.
+8. Open an application with a name longer than about 30 characters. Make sure that the label shows an ellipsis at the right end.
+9. Enter panel edit mode when no task is active. Make sure that `Application Name` appears and that you can move the widget. Exit edit mode. Make sure that the label becomes empty again.
 
 ## Instructions for coding agents
 

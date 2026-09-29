@@ -39,7 +39,8 @@ Keep these functions:
 - Use a transparent background and one line of plain text.
 - Replace excess text at the right end with an ellipsis.
 - Keep the widget free of icons and window buttons.
-- Show an empty label when no active application name is available.
+- Show an empty label when no active application name is available outside edit mode.
+- Show a text placeholder in edit mode when the application name is empty.
 
 Keep the name rules in `contents/code/Names.js`.
 Match the full application name. Keep matches case-sensitive.

@@ -15,8 +15,8 @@ PlasmoidItem {
     readonly property real maximumLabelWidth: Kirigami.Units.gridUnit * 12
     readonly property real naturalWidth: Math.min(label.implicitWidth, maximumLabelWidth)
 
-    Layout.minimumWidth: Kirigami.Units.gridUnit * 2
-    Layout.preferredWidth: Math.max(Layout.minimumWidth, naturalWidth)
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 2, naturalWidth)
+    Layout.preferredWidth: Layout.minimumWidth
     Layout.maximumWidth: Layout.preferredWidth
     Layout.minimumHeight: label.implicitHeight + padding * 2
     Layout.preferredHeight: Layout.minimumHeight
@@ -26,7 +26,7 @@ PlasmoidItem {
     PlasmaComponents.Label {
         id: label
         anchors.fill: parent
-        text: activeApplication.name
+        text: activeApplication.name || (root.Plasmoid.containment?.corona?.editMode ? qsTr("Application Name") : "")
         textFormat: Text.PlainText
         font.bold: true
         // PlasmaComponents.Label uses the panel theme and system font.
