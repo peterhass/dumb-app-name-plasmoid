@@ -119,6 +119,7 @@ Run the QML tests:
 ```
 
 The tests use the widget QML files and a test task model.
+The test task model uses its own QML module so that it does not load the installed Plasma task model.
 They check these conditions:
 
 - The active task changes.
@@ -129,7 +130,16 @@ They check these conditions:
 
 The tests do not check the actual Plasma task model or panel.
 
-The GitHub Actions workflow also checks QML syntax and creates an installation file.
+On Arch Linux with Plasma 6, run the Qt 6 QML type check:
+
+```sh
+/usr/lib/qt6/bin/qmllint contents/ui/main.qml contents/ui/ActiveApplication.qml
+```
+
+The `qt6-declarative` package supplies this command.
+Use this Qt 6 path because the unqualified `qmllint` command can be a Qt 5 tool.
+The check needs the installed Plasma QML modules.
+The GitHub Actions workflow checks QML syntax and creates an installation file.
 You can get this file from the workflow run.
 
 ## Check the widget in Plasma

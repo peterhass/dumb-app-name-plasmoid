@@ -85,6 +85,14 @@ git diff --check
 ```
 
 Use the test setup instructions in `README.md` if the Qt tools are not installed.
+On Arch Linux with Plasma 6, also run the Qt 6 QML type check:
+
+```sh
+/usr/lib/qt6/bin/qmllint contents/ui/main.qml contents/ui/ActiveApplication.qml
+```
+
+Use Qt 6 tools for both QML checks. The unqualified `qmlformat` and `qmllint` commands can be Qt 5 tools.
+The type check needs the Plasma QML modules. The CI runner does not install them.
 Add tests when a change adds behavior or corrects a defect.
 
 The QML tests use a test task model. They do not check actual Plasma panel behavior.

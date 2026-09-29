@@ -18,7 +18,7 @@ QtObject {
                                                TaskManager.AbstractTasksModel.AppName));
     }
 
-    property QtObject tasksModel: TaskManager.TasksModel {
+    property TaskManager.TasksModel tasksModel: TaskManager.TasksModel {
         groupMode: TaskManager.TasksModel.GroupDisabled
         // Include tasks from all monitors, virtual desktops, and activities.
         filterByScreen: false

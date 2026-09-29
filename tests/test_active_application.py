@@ -75,8 +75,8 @@ class TasksModel(QAbstractListModel):
 
 
 app = QCoreApplication([])
-qmlRegisterType(TasksModel, "org.kde.taskmanager", 1, 0, "TasksModel")
-qmlRegisterUncreatableType(AbstractTasksModel, "org.kde.taskmanager", 1, 0,
+qmlRegisterType(TasksModel, "test.taskmanager", 1, 0, "TasksModel")
+qmlRegisterUncreatableType(AbstractTasksModel, "test.taskmanager", 1, 0,
                           "AbstractTasksModel", "Enums only")
 
 
@@ -85,7 +85,11 @@ class ActiveApplicationTests(unittest.TestCase):
         self.engine = QQmlEngine()
         self.component = QQmlComponent(self.engine)
         path = Path(__file__).resolve().parents[1] / "contents/ui/ActiveApplication.qml"
-        self.component.loadUrl(QUrl.fromLocalFile(str(path)))
+        source = path.read_text()
+        production_import = "import org.kde.taskmanager as TaskManager"
+        self.assertIn(production_import, source)
+        source = source.replace(production_import, "import test.taskmanager as TaskManager")
+        self.component.setData(source.encode(), QUrl.fromLocalFile(str(path)))
         self.assertFalse(self.component.isError(), str(self.component.errors()))
         self.tracker = self.component.create()
         self.assertIsNotNone(self.tracker, str(self.component.errors()))

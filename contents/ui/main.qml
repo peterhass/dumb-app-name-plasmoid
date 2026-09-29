@@ -23,8 +23,9 @@ PlasmoidItem {
 
     ActiveApplication { id: activeApplication }
 
-    fullRepresentation: PlasmaComponents.Label {
+    PlasmaComponents.Label {
         id: label
+        anchors.fill: parent
         text: activeApplication.name
         textFormat: Text.PlainText
         font.bold: true
