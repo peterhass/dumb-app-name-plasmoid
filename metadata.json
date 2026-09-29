@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Id": "com.github.peterhass.dumb-app-name-plasmoid",
+        "Name": "dumb-app-name-plasmoid",
+        "Description": "Just the active application's name, in bold.",
+        "Icon": "preferences-system-windows",
+        "Version": "0.1.0",
+        "License": "MIT",
+        "Authors": [{ "Name": "Peter Haßler" }],
+        "Website": "https://github.com/peterhass/dumb-app-name-plasmoid",
+        "Category": "Windows and Tasks"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
