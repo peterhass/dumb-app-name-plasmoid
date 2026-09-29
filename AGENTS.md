@@ -1,108 +1,20 @@
 # Instructions for coding agents
 
-These instructions apply to all files in this repository.
-
 ## Language
 
-Use Simplified Technical English for all communication and documentation.
-This rule includes:
+- Use Simplified Technical English in user messages, documentation, comments, commit messages, and widget text. Use short, active sentences and consistent terms. Keep API names, commands, paths, legal text, and SPDX identifiers exact.
 
-- Messages to the user and progress reports.
-- README files and other documentation.
-- Code comments and Python docstrings.
-- Commit messages, pull request descriptions, and issue text.
-- Text that the widget shows to the user.
+## Widget constraints
 
-Use short sentences, common words, and active voice.
-Give one instruction in each sentence.
-Use the same term for the same object or function.
-Explain technical terms when the reader needs the explanation.
-Avoid idioms, unnecessary words, and unclear abbreviations.
-Use numbered steps for procedures.
+- This is a Plasma 6 QML widget. Do not add a C++ plugin or external process unless requested. Keep the widget ID in `metadata.json` and the MIT license unless requested to change them.
+- `contents/ui/ActiveApplication.qml` reads `TaskManager.AbstractTasksModel.AppName` from the active task. Keep task grouping disabled and screen, virtual desktop, and activity filters off. Model data can change without a new active index; keep the label updated on model changes. Do not use window or document titles as application names.
+- Keep name substitutions in `contents/code/Names.js`. Match the full application name with case-sensitive rules.
+- `contents/ui/main.qml` uses `PlasmaComponents.Label` for the panel text color and system font. Keep theme and font updates live; change only the font weight to bold. Keep the background transparent, the text plain and on one line, and the right-end ellipsis. Do not add icons or window buttons. Show an empty label when no name is available, except for the text placeholder in edit mode.
 
-Keep API names, code identifiers, commands, paths, and application names exact.
-Keep legal license text and SPDX identifiers exact.
+## Checks and packaging
 
-## Project purpose
-
-The widget shows the active application name in a Plasma 6 panel.
-Keep the widget small. Use QML and the Plasma task model.
-Do not add a custom C++ plugin or an external process without a user request.
-
-Keep these functions:
-
-- Read the application name from `TaskManager.AbstractTasksModel.AppName`.
-- Track the active task across all monitors.
-- Keep screen, virtual desktop, and activity filters disabled.
-- Use the panel text color and the system font. Keep the text bold.
-- Update the label when the theme or font changes.
-- Use a transparent background and one line of plain text.
-- Replace excess text at the right end with an ellipsis.
-- Keep the widget free of icons and window buttons.
-- Show an empty label when no active application name is available outside edit mode.
-- Show a text placeholder in edit mode when the application name is empty.
-
-Keep the name rules in `contents/code/Names.js`.
-Match the full application name. Keep matches case-sensitive.
-Do not use the window title or document title as an application name.
-
-## Files
-
-| Path | Purpose |
-| --- | --- |
-| `metadata.json` | Plasma package information and widget identity. |
-| `contents/ui/main.qml` | Panel label and layout. |
-| `contents/ui/ActiveApplication.qml` | Active task and application name. |
-| `contents/code/Names.js` | Application name rules. |
-| `scripts/package.py` | Installation file creation. |
-| `tests/names.test.cjs` | Application name tests. |
-| `tests/test_active_application.py` | QML tests with a test task model. |
-| `.github/workflows/check.yml` | Automated checks and package creation. |
-| `README.md` | Installation, use, and test instructions. |
-
-## Make changes
-
-Read the related files before you edit them.
-Keep changes within the user request.
-Keep existing user changes.
-Keep the widget ID and the MIT license unless the user requests a change.
-Keep generated files in `dist/`. Do not commit them.
-Update the documentation when a change affects installation or use.
-
-## Check changes
-
-For documentation changes, run `git diff --check`.
-If you change package instructions or packaged files, also run `python3 scripts/package.py`.
-
-For code changes, run the related checks:
-
-```sh
-node tests/names.test.cjs
-.venv/bin/python tests/test_active_application.py
-.venv/bin/pyside6-qmlformat contents/ui/main.qml > /dev/null
-.venv/bin/pyside6-qmlformat contents/ui/ActiveApplication.qml > /dev/null
-python3 scripts/package.py
-git diff --check
-```
-
-Use the test setup instructions in `README.md` if the Qt tools are not installed.
-On Arch Linux with Plasma 6, also run the Qt 6 QML type check:
-
-```sh
-/usr/lib/qt6/bin/qmllint contents/ui/main.qml contents/ui/ActiveApplication.qml
-```
-
-Use Qt 6 tools for both QML checks. The unqualified `qmlformat` and `qmllint` commands can be Qt 5 tools.
-The type check needs the Plasma QML modules. The CI runner does not install them.
-Add tests when a change adds behavior or corrects a defect.
-
-The QML tests use a test task model. They do not check actual Plasma panel behavior.
-Use the manual checks in `README.md` for theme, font, and monitor changes.
-State which checks passed. State which checks you could not run.
-Do not report actual Plasma behavior as tested unless you tested it in Plasma.
-
-## Deliver changes
-
-Use a short commit message that describes the change.
-Commit or publish changes when the user has authorized that action.
-In the final report, describe the result, the checks, and any remaining limits.
+- Run `node tests/names.test.cjs` for name rules. Run `.venv/bin/python tests/test_active_application.py` for task-model changes. These tests use a substitute task model, not the installed Plasma model or panel. They run without a display server.
+- To set up Qt test tools: `python3 -m venv .venv` and `.venv/bin/pip install PySide6-Essentials==6.11.2`. Parse both QML files with `.venv/bin/pyside6-qmlformat contents/ui/main.qml > /dev/null` and `.venv/bin/pyside6-qmlformat contents/ui/ActiveApplication.qml > /dev/null`.
+- On Arch Linux with Plasma 6, run `/usr/lib/qt6/bin/qmllint contents/ui/main.qml contents/ui/ActiveApplication.qml`. Use this Qt 6 path: the unqualified command can be Qt 5. The type check needs installed Plasma QML modules and does not run in CI.
+- Run `python3 scripts/package.py` when package instructions or packaged files change. It packages `metadata.json`, `LICENSE`, `README.md`, and all files under `contents/` into `dist/dumb-app-name-plasmoid.plasmoid`. `dist/` is ignored; do not commit its contents.
+- Run `git diff --check` for changes. For theme, font, and monitor behavior, use the manual checks in `README.md`. Do not report Plasma behavior as tested unless you tested it in Plasma. State which checks ran and which could not run.
